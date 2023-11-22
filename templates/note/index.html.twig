@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Scores'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{{'Scores'|trans }}</h1>
+            {% if matieres is not empty %}
+                {% if notes is empty %}
+                    <p>{{'NoGradesYet'|trans }}</p>
+                {% else %}
+
+                    <table class="table">
+                        <tbody>
+                            {% for matiere in matieres %}
+                                {% if matiere.notes is not empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center"><h2>{{ matiere.name }} ({{'Coefficient'|trans}} {{matiere.coefficient}})</h2></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="p-0">
+                                            <table class="table mb-0 table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>{{'Score'|trans }}</th>
+                                                        <th>{{'Date'|trans }}</th>
+                                                        <th>{{'Actions'|trans }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for note in notes %}
+                                                    {% if matiere.id == note.matiere.id %}
+                                                        <tr>
+                                                            <td>{{ note.note }}/20</td>
+                                                            <td>{{ note.created_at|format_date('short', locale='fr') }} à {{ note.created_at|format_time('short', locale='fr') }}</td>
+                                                            <td>
+                                                                <a href="{{ path('app_note_edit', {'id': note.id}) }}" class="btn btn-warning">{{'Edit'|trans}}</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="3" class="text-end">
+                                                            <h2>{{'Average'|trans}} :{{ moyennesParMatiere[matiere.id] }}/20</h2>
+                                                        </td>
+                                                    </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <h2>{{ 'GeneralAverage'|trans }} : {{ moyenne }}/20</h2>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                {% endif %}
+                <a href="{{ path('app_note_create') }}" class="btn btn-success">{{ 'NewGrade'|trans }}</a>
+            {% else %}
+                <p>{{ 'NoSubjectsYet'|trans }}</p>
+                <a href="{{ path('app_matiere_add') }}" class="btn btn-success">{{ 'CreateSubject'|trans }}</a>
+            {% endif %}
+        </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'EditGrade'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">{{ 'EditGrade'|trans }}</h1>
+        </div>
+        <div class="col-12 m-auto" style="max-width:340px;">
+            {{ form_start(form) }}
+            {% if form_errors(form) %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+            <div class="m-3">
+                {{ form_label(form.eleve) }}
+                {{ form_widget(form.eleve, { 'attr': {'class': 'form-select'} }) }}
+            </div>
+            <div class="m-3">
+                {{ form_label(form.matiere) }}
+                {{ form_widget(form.matiere, { 'attr': {'class': 'form-select'} }) }}
+            </div>
+            <div class="m-3">
+                {{ form_label(form.note) }}
+                {{ form_widget(form.note, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <div class="input-group m-3">
+                <input type="submit" class="btn btn-primary" value="{{'Save'|trans}}" />
+                <a href="{{ path('app_note') }}" class="btn btn-secondary">{{'Back'|trans}}</a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
