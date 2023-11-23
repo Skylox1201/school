@@ -80,4 +80,20 @@ class NoteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/note/delete/{id}', name: 'app_note_delete')]
+    public function delete(EntityManagerInterface $em, $id): Response
+    {
+        $note = $em->getRepository(Note::class)->find($id);
+        if (!$note) {
+            $this->addFlash('error', 'La note n\'existe pas.');
+            return $this->redirectToRoute('app_note');
+        }
+
+        $em->remove($note);
+        $em->flush();
+
+        $this->addFlash('success', 'Note supprimée !');
+        return $this->redirectToRoute('app_note');
+    }
 }

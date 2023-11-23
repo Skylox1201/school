@@ -37,6 +37,7 @@
                                                             <td>{{ note.created_at|format_date('short', locale='fr') }} à {{ note.created_at|format_time('short', locale='fr') }}</td>
                                                             <td>
                                                                 <a href="{{ path('app_note_edit', {'id': note.id}) }}" class="btn btn-warning">{{'Edit'|trans}}</a>
+                                                                <a href="{{ path('app_note_delete', {'id': note.id}) }}" class="btn btn-danger">{{'Delete'|trans}}</a>
                                                             </td>
                                                         </tr>
                                                     {% endif %}
