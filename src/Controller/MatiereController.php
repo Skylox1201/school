@@ -26,7 +26,7 @@ class MatiereController extends AbstractController
     {
         $matiere = $em->getRepository(Matiere::class)->find($id);
         if (!$matiere) {
-            $this->addFlash('error', 'La matière n\'existe pas.');
+            $this->addFlash('danger', 'La matière n\'existe pas.');
             return $this->redirectToRoute('app_matiere');
         }
 
@@ -65,12 +65,12 @@ class MatiereController extends AbstractController
         }
     }
 
-    #[Route('/matiere/{id}/delete', name: 'app_matiere_delete')]
+    #[Route('/matiere/delete/{id}', name: 'app_matiere_delete')]
     public function delete(EntityManagerInterface $em, Request $request): Response
     {
         $matiere = $em->getRepository(Matiere::class)->find($request->get('id'));
         if (!$matiere) {
-            $this->addFlash('error', 'La matière n\'existe pas.');
+            $this->addFlash('danger', 'La matière n\'existe pas.');
             return $this->redirectToRoute('app_matiere');
         }
         $em->remove($matiere);

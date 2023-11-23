@@ -11,7 +11,6 @@
                 {% if notes is empty %}
                     <p>{{'NoGradesYet'|trans }}</p>
                 {% else %}
-
                     <table class="table">
                         <tbody>
                             {% for matiere in matieres %}
@@ -66,8 +65,8 @@
                 {% endif %}
                 <a href="{{ path('app_note_create') }}" class="btn btn-success">{{ 'NewGrade'|trans }}</a>
             {% else %}
-                <p>{{ 'NoSubjectsYet'|trans }}</p>
-                <a href="{{ path('app_matiere_add') }}" class="btn btn-success">{{ 'CreateSubject'|trans }}</a>
+                <div class="alert alert-info mb-3" role"alert">{{ 'NoSubjectsYet'|trans }}</div>
+                <a href="{{ path('app_matiere_add') }}" class="btn btn-success mb-3">{{ 'CreateSubject'|trans }}</a>
             {% endif %}
         </div>
 {% endblock %}

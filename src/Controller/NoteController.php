@@ -42,7 +42,7 @@ class NoteController extends AbstractController
     {
         $note = $em->getRepository(Note::class)->find($id);
         if (!$note) {
-            $this->addFlash('error', 'La note n\'existe pas.');
+            $this->addFlash('danger', 'La note n\'existe pas.');
             return $this->redirectToRoute('app_note');
         }
 
@@ -86,7 +86,7 @@ class NoteController extends AbstractController
     {
         $note = $em->getRepository(Note::class)->find($id);
         if (!$note) {
-            $this->addFlash('error', 'La note n\'existe pas.');
+            $this->addFlash('danger', 'La note n\'existe pas.');
             return $this->redirectToRoute('app_note');
         }
 
