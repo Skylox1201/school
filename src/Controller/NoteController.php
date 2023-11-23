@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NoteController extends AbstractController
 {
-    #[Route('/note/list', name: 'app_note')]
+    #[Route('/', name: 'app_note')]
     public function index(EntityManagerInterface $em): Response
     {
         $notes = $em->getRepository(Note::class)->findAll();
